@@ -1,4 +1,4 @@
 
 data/algs4-data/*
-lib/checkstyle-7.2/*
-lib/findbugs-3.0.1/*
+.idea/*
+target/*

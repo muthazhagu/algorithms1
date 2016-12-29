@@ -9,7 +9,7 @@ import java.io.File;
 /**
  * Created by muthu on 12/28/16.
  */
-public class DynamicConnectivity {
+public class UFDynamicConnectivityClient {
     public static void main(String[] args) {
         File file = new File(args[0]);
         In in = new In(file);

@@ -18,23 +18,35 @@ public class QuickFind {
     public static void main(String[] args) {
         QuickFind qf = new QuickFind(10);
 
+        StdOut.println("Program input");
         qf.printArray(qf.id);
 
-        StdOut.println(qf.connected(0, 1));
-        StdOut.println(qf.connected(9, 9));
-        StdOut.println(qf.connected(9, 1));
+        StdOut.println();
+        StdOut.printf("Are 0 and 1 connected: %b\n", qf.connected(0, 1));
+        StdOut.printf("Are 9 and 9 connected: %b\n", qf.connected(9, 9));
+        StdOut.printf("Are 9 and 1 connected: %b\n", qf.connected(9, 1));
 
         qf.id[5] = 99;
         qf.id[7] = 99;
         qf.id[9] = 100;
 
-        StdOut.println(qf.connected(5, 7));
-
+        StdOut.println();
+        StdOut.println("Changed input #1");
         qf.printArray(qf.id);
+
+        StdOut.println();
+        StdOut.printf("Are 5 and 7 connected: %b\n", qf.connected(5, 7));
 
         qf.union(5, 9);
-
+        StdOut.println();
+        StdOut.println("Changed input #2, after qf.union(5, 9)");
         qf.printArray(qf.id);
+
+        StdOut.println();
+        StdOut.printf("Are 5 and 7 connected: %b\n", qf.connected(5, 7));
+        StdOut.printf("Are 7 and 9 connected: %b\n", qf.connected(7, 9));
+        StdOut.printf("Are 9 and 5 connected: %b\n", qf.connected(9, 5));
+        StdOut.printf("Are 9 and 0 connected: %b\n", qf.connected(9, 0));
     }
 
     public boolean connected(int p, int q) {
@@ -54,8 +66,9 @@ public class QuickFind {
 
     private void printArray(int[] myArray) {
         for (int i = 0; i < myArray.length; i++) {
-            StdOut.print(myArray[i]);
-            StdOut.println();
+            StdOut.printf("%d\t", myArray[i]);
         }
+
+        StdOut.println();
     }
 }

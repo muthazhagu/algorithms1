@@ -71,6 +71,11 @@ public class QuickUnion {
 
         StdOut.println();
         StdOut.printf("Are 5 and 7 connected: %b\n", qu.connected(5, 7));
+        StdOut.printf("Are 7 and 9 connected: %b\n", qu.connected(7, 9));
+        StdOut.printf("Are 9 and 5 connected: %b\n", qu.connected(9, 5));
+        StdOut.printf("Are 0 and 1 connected: %b\n", qu.connected(0, 1));
+        StdOut.printf("Are 9 and 9 connected: %b\n", qu.connected(9, 9));
+        StdOut.printf("Are 9 and 1 connected: %b\n", qu.connected(9, 1));
 
         qu.union(5, 9);
         StdOut.println();
@@ -82,5 +87,8 @@ public class QuickUnion {
         StdOut.printf("Are 7 and 9 connected: %b\n", qu.connected(7, 9));
         StdOut.printf("Are 9 and 5 connected: %b\n", qu.connected(9, 5));
         StdOut.printf("Are 9 and 0 connected: %b\n", qu.connected(9, 0));
+        StdOut.printf("Are 0 and 1 connected: %b\n", qu.connected(0, 1));
+        StdOut.printf("Are 9 and 9 connected: %b\n", qu.connected(9, 9));
+        StdOut.printf("Are 9 and 1 connected: %b\n", qu.connected(9, 1));
     }
 }

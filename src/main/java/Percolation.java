@@ -137,6 +137,8 @@ public class Percolation {
     }
 
     private void checkBounds(int row, int col) {
+        row -= 1;
+        col -= 1;
         if (row < 0 || col < 0 || row > gridSize || col > gridSize) throw new IndexOutOfBoundsException();
     }
 

@@ -137,7 +137,7 @@ public class Percolation {
     }
 
     private void checkBounds(int row, int col) {
-        if (row < 0 || col < 0 || row >= gridSize || col >= gridSize) throw new IndexOutOfBoundsException();
+        if (row < 0 || col < 0 || row > gridSize || col > gridSize) throw new IndexOutOfBoundsException();
     }
 
     private int get1DArrayPosition(int row, int col) {

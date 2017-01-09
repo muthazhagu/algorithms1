@@ -1,5 +1,4 @@
 
-import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -7,7 +6,7 @@ public class Percolation {
     private boolean[][] grid;
     private int numberOfClosedSites;
     private final int gridSize;
-    WeightedQuickUnionUF wquf;
+    private WeightedQuickUnionUF wquf;
     private int virtualUpper;
     private int virtualLower;
 
@@ -35,7 +34,8 @@ public class Percolation {
 
         wquf = new WeightedQuickUnionUF(n * n + 2);
 
-        // StdOut.printf("Before doing any unions, are the virtual upper, and lower connected? %b\n", wquf.connected(virtualUpper, virtualLower));
+        // StdOut.printf("Before doing any unions, are the virtual upper, and lower connected? %b\n",
+        // wquf.connected(virtualUpper, virtualLower));
 
         // Connect upper row to virtualUpper
         for (int i = 0; i < n; i++) {
@@ -60,7 +60,8 @@ public class Percolation {
         // StdOut.printf("Component identifier for %d is %d\n", 99, wquf.find(99));
         // StdOut.printf("Component identifier for %d is %d\n", 101, wquf.find(101));
 
-        // StdOut.printf("After doing unions, are the virtual upper, and lower connected? %b\n", wquf.connected(virtualUpper, virtualLower));
+        // StdOut.printf("After doing unions, are the virtual upper, and lower connected? %b\n",
+        // wquf.connected(virtualUpper, virtualLower));
     }
 
     // open site (row, col) if it is not open already
@@ -70,6 +71,46 @@ public class Percolation {
         if (!grid[row][col]) {
             grid[row][col] = true;
             numberOfClosedSites -= 1;
+        }
+
+        // find the site to the right of the current site (row, col + 1)
+        // see if it is open
+        // if open, union with the current site
+        if (col + 1 < gridSize) {
+            if (isOpen(row, col + 1)) {
+//                        StdOut.println("Site to the right is open!");
+                wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row, col + 1));
+            }
+        }
+
+        // find the site to the bottom of the current site (row + 1, col)
+        // see if it is open
+        // if open, union with the current site
+        if (row + 1 < gridSize) {
+            if (isOpen(row + 1, col)) {
+//                        StdOut.println("Site to the bottom is open!");
+                wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row + 1, col));
+            }
+        }
+
+        // find the site to the left of the current site (row, col - 1)
+        // see if it is open
+        // if open, union with the current site
+        if (col - 1 >= 0) {
+            if (isOpen(row, col - 1)) {
+//                        StdOut.println("Site to the left is open!");
+                wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row, col - 1));
+            }
+        }
+
+        // find the site to the top of the current site (row - 1 , col)
+        // see if it is open
+        // if open, union with the current site
+        if (row - 1 >= 0) {
+            if (isOpen(row - 1, col)) {
+//                        StdOut.println("Site to the top is open!");
+                wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row - 1, col));
+            }
         }
     }
 
@@ -99,7 +140,7 @@ public class Percolation {
         if (row < 0 || col < 0 || row >= gridSize || col >= gridSize) throw new IndexOutOfBoundsException();
     }
 
-    int get1DArrayPosition(int row, int col) {
+    private int get1DArrayPosition(int row, int col) {
         return gridSize * row + col;
     }
 
@@ -112,9 +153,11 @@ public class Percolation {
 //        StdOut.printf("Is %d, %d full after opening? %b\n", 0, 0, p.isFull(0, 0));
 //        p.open(1, 0);
 //        StdOut.printf("Is %d, %d full after opening? %b\n", 1, 0, p.isFull(1, 0));
-//        StdOut.printf("Is %d, %d connected to virtual upper? %b\n", 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
+//        StdOut.printf("Is %d, %d connected to virtual upper? %b\n",
+// 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
 //        p.wquf.union(p.get1DArrayPosition(1, 0), p.virtualUpper);
-//        StdOut.printf("Is %d, %d connected to virtual upper? %b\n", 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
+//        StdOut.printf("Is %d, %d connected to virtual upper? %b\n",
+// 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());
 //        p.wquf.union(p.virtualLower, p.virtualUpper);
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());

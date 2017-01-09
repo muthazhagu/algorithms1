@@ -49,46 +49,6 @@ public class PercolationStats {
                 int col = StdRandom.uniform(0, ps.n);
 //                StdOut.printf("row: %d, col: %d\n", row, col);
                 p.open(row, col);
-
-                // find the site to the right of the current site (row, col + 1)
-                // see if it is open
-                // if open, union with the current site
-                if (col + 1 < ps.n) {
-                    if (p.isOpen(row, col + 1)) {
-//                        StdOut.println("Site to the right is open!");
-                        p.wquf.union(p.get1DArrayPosition(row, col), p.get1DArrayPosition(row, col + 1));
-                    }
-                }
-
-                // find the site to the bottom of the current site (row + 1, col)
-                // see if it is open
-                // if open, union with the current site
-                if (row + 1 < ps.n) {
-                    if (p.isOpen(row + 1, col)) {
-//                        StdOut.println("Site to the bottom is open!");
-                        p.wquf.union(p.get1DArrayPosition(row, col), p.get1DArrayPosition(row + 1, col));
-                    }
-                }
-
-                // find the site to the left of the current site (row, col - 1)
-                // see if it is open
-                // if open, union with the current site
-                if (col - 1 >= 0) {
-                    if (p.isOpen(row, col - 1)) {
-//                        StdOut.println("Site to the left is open!");
-                        p.wquf.union(p.get1DArrayPosition(row, col), p.get1DArrayPosition(row, col - 1));
-                    }
-                }
-
-                // find the site to the top of the current site (row - 1 , col)
-                // see if it is open
-                // if open, union with the current site
-                if (row - 1 >= 0) {
-                    if (p.isOpen(row - 1, col)) {
-//                        StdOut.println("Site to the top is open!");
-                        p.wquf.union(p.get1DArrayPosition(row, col), p.get1DArrayPosition(row - 1, col));
-                    }
-                }
             }
             ps.percolationThreshold[i] = p.numberOfOpenSites() / (double) (ps.n * ps.n);
         }

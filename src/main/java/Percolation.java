@@ -1,9 +1,5 @@
 
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
-
-import java.io.File;
 
 public class Percolation {
 
@@ -28,18 +24,18 @@ public class Percolation {
 
         gridSize = n;
         numberOfClosedSites = n * n;
-        StdOut.printf("Grid size is [%d]\n", n);
-        StdOut.printf("Number of closed sites is [%d]\n", numberOfClosedSites);
+        // StdOut.printf("Grid size is [%d]\n", n);
+        // StdOut.printf("Number of closed sites is [%d]\n", numberOfClosedSites);
 
         virtualUpper = n * n;
         virtualLower = n * n + 1;
-        StdOut.printf("Virtual Upper is [%d]\n", virtualUpper);
-        StdOut.printf("Virtual Lower is [%d]\n", virtualLower);
+        // StdOut.printf("Virtual Upper is [%d]\n", virtualUpper);
+        // StdOut.printf("Virtual Lower is [%d]\n", virtualLower);
 
         wquf = new WeightedQuickUnionUF(n * n + 2);
 
-        StdOut.printf("Before doing any unions, are the virtual upper, and lower connected? %b\n",
-                wquf.connected(virtualUpper, virtualLower));
+        // StdOut.printf("Before doing any unions, are the virtual upper, and lower connected? %b\n",
+//                wquf.connected(virtualUpper, virtualLower));
 
         // Connect upper row to virtualUpper
         for (int i = 0; i < n; i++) {
@@ -64,16 +60,16 @@ public class Percolation {
         // StdOut.printf("Component identifier for %d is %d\n", 99, wquf.find(99));
         // StdOut.printf("Component identifier for %d is %d\n", 101, wquf.find(101));
 
-        StdOut.printf("After doing unions, are the virtual upper, and lower connected? %b\n\n\n",
-                wquf.connected(virtualUpper, virtualLower));
+        // StdOut.printf("After doing unions, are the virtual upper, and lower connected? %b\n\n\n",
+//                wquf.connected(virtualUpper, virtualLower));
     }
 
     // open site (row, col) if it is not open already
     public void open(int row, int col) {
         checkBounds(row, col);
 
-        if (!grid[row][col]) {
-            grid[row][col] = true;
+        if (!grid[row - 1][col - 1]) {
+            grid[row - 1][col - 1] = true;
             numberOfClosedSites -= 1;
         }
 
@@ -100,7 +96,7 @@ public class Percolation {
         // find the site to the left of the current site (row, col - 1)
         // see if it is open
         // if open, union with the current site
-        if (col - 1 >= 0) {
+        if (col - 1 >= 1) {
             if (isOpen(row, col - 1)) {
 //                        StdOut.println("Site to the left is open!");
                 wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row, col - 1));
@@ -110,7 +106,7 @@ public class Percolation {
         // find the site to the top of the current site (row - 1 , col)
         // see if it is open
         // if open, union with the current site
-        if (row - 1 >= 0) {
+        if (row - 1 >= 1) {
             if (isOpen(row - 1, col)) {
 //                        StdOut.println("Site to the top is open!");
                 wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row - 1, col));
@@ -121,7 +117,7 @@ public class Percolation {
     // is site (row, col) open?
     public boolean isOpen(int row, int col) {
         checkBounds(row, col);
-        return grid[row][col];
+        return grid[row - 1][col - 1];
     }
 
     // is site (row, col) full?
@@ -141,17 +137,17 @@ public class Percolation {
     }
 
     private void checkBounds(int row, int col) {
-        StdOut.printf("In checkBounds\n");
-        StdOut.printf("row: %d, col: %d\n", row, col);
+        // StdOut.printf("In checkBounds\n");
+        // StdOut.printf("row: %d, col: %d\n", row, col);
         row -= 1;
         col -= 1;
-        StdOut.printf("row: %d, col: %d - adjusted\n", row, col);
+        // StdOut.printf("row: %d, col: %d - adjusted\n", row, col);
         if (row < 0 || col < 0 || row >= gridSize || col >= gridSize) throw new IndexOutOfBoundsException();
-        StdOut.println("checkBounds passed!");
+//        StdOut.println("checkBounds passed!");
     }
 
     private int get1DArrayPosition(int row, int col) {
-        return gridSize * row + col;
+        return gridSize * (row - 1) + (col - 1);
     }
 
     // test client (optional)
@@ -171,21 +167,21 @@ public class Percolation {
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());
 //        p.wquf.union(p.virtualLower, p.virtualUpper);
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());
-        File file = new File(args[0]);
-        In in = new In(file);
-        int n = in.readInt();
-        Percolation percolation = new Percolation(n);
-        while (in.hasNextLine()) {
-            int p = in.readInt();
-            int q = in.readInt();
-
-            percolation.open(p, q);
-
-            StdOut.printf("isOpen(%d, %d) %b\n", p, q, percolation.isOpen(p, q));
-            StdOut.printf("percolates(%d, %d) %b\n", p, q, percolation.percolates());
-            StdOut.printf("numberOfOpenSites(%d, %d) %d\n", p, q, percolation.numberOfOpenSites());
-            StdOut.printf("isFull(%d, %d) %b\n", p, q, percolation.isFull(p, q));
-
-        }
+//        File file = new File(args[0]);
+//        In in = new In(file);
+//        int n = in.readInt();
+//        Percolation percolation = new Percolation(n);
+//        while (in.hasNextLine()) {
+//            int p = in.readInt();
+//            int q = in.readInt();
+//
+//            percolation.open(p, q);
+//
+//            StdOut.printf("isOpen(%d, %d) %b\n", p, q, percolation.isOpen(p, q));
+//            StdOut.printf("percolates(%d, %d) %b\n", p, q, percolation.percolates());
+//            StdOut.printf("numberOfOpenSites(%d, %d) %d\n", p, q, percolation.numberOfOpenSites());
+//            StdOut.printf("isFull(%d, %d) %b\n", p, q, percolation.isFull(p, q));
+//
+//        }
     }
 }

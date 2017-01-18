@@ -1,3 +1,4 @@
+package dynamicconnectivity;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
@@ -153,7 +154,7 @@ public class Percolation {
     // test client (optional)
     public static void main(String[] args) {
 
-//        Percolation p = new Percolation(10);
+//        dynamicconnectivity.Percolation p = new dynamicconnectivity.Percolation(10);
 //        StdOut.printf("Is %d, %d full before opening? %b\n", 0, 0, p.isFull(0, 0));
 //        p.open(0, 0);
 //        StdOut.printf("Is %d, %d full after opening? %b\n", 0, 0, p.isFull(0, 0));
@@ -170,7 +171,7 @@ public class Percolation {
 //        File file = new File(args[0]);
 //        In in = new In(file);
 //        int n = in.readInt();
-//        Percolation percolation = new Percolation(n);
+//        dynamicconnectivity.Percolation percolation = new dynamicconnectivity.Percolation(n);
 //        while (in.hasNextLine()) {
 //            int p = in.readInt();
 //            int q = in.readInt();

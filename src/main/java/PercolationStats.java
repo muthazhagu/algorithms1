@@ -16,6 +16,18 @@ public class PercolationStats {
         this.trials = trials;
 
         percolationThreshold = new double[trials];
+
+        for (int i = 0; i < this.trials; i++) {
+            Percolation p = new Percolation(this.n);
+            while (!p.percolates()) {
+                int row = StdRandom.uniform(1, this.n + 1);
+                int col = StdRandom.uniform(1, this.n + 1);
+//                StdOut.printf("row: %d, col: %d\n", row, col);
+                p.open(row, col);
+            }
+
+            this.percolationThreshold[i] = p.numberOfOpenSites() / (double) (this.n * this.n);
+        }
     }
 
     // sample mean of percolation threshold
@@ -41,17 +53,6 @@ public class PercolationStats {
     // test client (described below)
     public static void main(String[] args) {
         PercolationStats ps = new PercolationStats(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-
-        for (int i = 0; i < ps.trials; i++) {
-            Percolation p = new Percolation(ps.n);
-            while (!p.percolates()) {
-                int row = StdRandom.uniform(1, ps.n + 1);
-                int col = StdRandom.uniform(1, ps.n + 1);
-//                StdOut.printf("row: %d, col: %d\n", row, col);
-                p.open(row, col);
-            }
-            ps.percolationThreshold[i] = p.numberOfOpenSites() / (double) (ps.n * ps.n);
-        }
 
         StdOut.printf("mean                     = %f\n", ps.mean());
         StdOut.printf("stddev                   = %f\n", ps.stddev());

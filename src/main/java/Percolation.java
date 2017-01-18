@@ -76,7 +76,7 @@ public class Percolation {
         // find the site to the right of the current site (row, col + 1)
         // see if it is open
         // if open, union with the current site
-        if (col + 1 < gridSize) {
+        if (col + 1 <= gridSize) {
             if (isOpen(row, col + 1)) {
 //                        StdOut.println("Site to the right is open!");
                 wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row, col + 1));
@@ -86,7 +86,7 @@ public class Percolation {
         // find the site to the bottom of the current site (row + 1, col)
         // see if it is open
         // if open, union with the current site
-        if (row + 1 < gridSize) {
+        if (row + 1 <= gridSize) {
             if (isOpen(row + 1, col)) {
 //                        StdOut.println("Site to the bottom is open!");
                 wquf.union(get1DArrayPosition(row, col), get1DArrayPosition(row + 1, col));
@@ -152,18 +152,18 @@ public class Percolation {
 
     // test client (optional)
     public static void main(String[] args) {
-//        Percolation p = new Percolation(10);
 
+//        Percolation p = new Percolation(10);
 //        StdOut.printf("Is %d, %d full before opening? %b\n", 0, 0, p.isFull(0, 0));
 //        p.open(0, 0);
 //        StdOut.printf("Is %d, %d full after opening? %b\n", 0, 0, p.isFull(0, 0));
 //        p.open(1, 0);
 //        StdOut.printf("Is %d, %d full after opening? %b\n", 1, 0, p.isFull(1, 0));
 //        StdOut.printf("Is %d, %d connected to virtual upper? %b\n",
-// 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
+//                1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
 //        p.wquf.union(p.get1DArrayPosition(1, 0), p.virtualUpper);
 //        StdOut.printf("Is %d, %d connected to virtual upper? %b\n",
-// 1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
+//                1, 0, p.wquf.connected(p.get1DArrayPosition(1, 0), p.virtualUpper));
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());
 //        p.wquf.union(p.virtualLower, p.virtualUpper);
 //        StdOut.printf("Does the system percolate? %b\n", p.percolates());
@@ -174,14 +174,11 @@ public class Percolation {
 //        while (in.hasNextLine()) {
 //            int p = in.readInt();
 //            int q = in.readInt();
-//
 //            percolation.open(p, q);
-//
 //            StdOut.printf("isOpen(%d, %d) %b\n", p, q, percolation.isOpen(p, q));
 //            StdOut.printf("percolates(%d, %d) %b\n", p, q, percolation.percolates());
 //            StdOut.printf("numberOfOpenSites(%d, %d) %d\n", p, q, percolation.numberOfOpenSites());
 //            StdOut.printf("isFull(%d, %d) %b\n", p, q, percolation.isFull(p, q));
-//
-//        }
+//            StdOut.printf("\n");}
     }
 }

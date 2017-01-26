@@ -29,7 +29,7 @@ public class RandomizedQueueTest {
 
     @After
     public void teardown() {
-        verifyCount();
+        assert verifyCount();
     }
 
     @Test

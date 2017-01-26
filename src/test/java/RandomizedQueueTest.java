@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +11,25 @@ import java.util.NoSuchElementException;
 public class RandomizedQueueTest {
     private RandomizedQueue<String> q;
 
+    private boolean verifyCount() {
+        int count = 0;
+
+        for (String s: q) {
+            count += 1;
+        }
+
+        return count == q.size();
+    }
+
     @Before
     public void setup() {
         q = new RandomizedQueue<>();
         assert q.isEmpty();
+    }
+
+    @After
+    public void teardown() {
+        verifyCount();
     }
 
     @Test

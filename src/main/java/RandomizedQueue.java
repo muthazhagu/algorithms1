@@ -34,17 +34,27 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             resize(2 * q.length);
         }
 
-        q[tail] = item;
-        n += 1;
-        tail += 1;
+        q[tail++] = item;
+        n++;
     }
 
     // remove and return a random item
-//    public Item dequeue() {
-//        if (isEmpty()) {
-//            throw new NoSuchElementException();
-//        }
-//    }
+    public Item dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+
+        StdRandom.shuffle(q);
+        Item item = q[--tail];
+        q[tail] = null;
+        n--;
+
+        if (n == q.length/4) {
+            resize(q.length/2);
+        }
+
+        return item;
+    }
 
     // return (but do not remove) a random item
     public Item sample() {
@@ -90,7 +100,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public void remove() {
-            throw new NoSuchElementException();
+            throw new UnsupportedOperationException();
         }
     }
 }

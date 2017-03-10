@@ -11,8 +11,9 @@ public class Permutation {
 
         RandomizedQueue<String> r = new RandomizedQueue<>();
 
-        while ((s = StdIn.readString()) != null) {
-            System.out.println(s);
+        while (!StdIn.isEmpty()) {
+            s = StdIn.readString();
+//            System.out.println(s);
             r.enqueue(s);
         }
 

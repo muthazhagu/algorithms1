@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] q = (Item[]) new Object[1];
     private int n = 0;
-    private int tail = 0;
+//    private int tail = 0;
 
     // construct an empty randomized queue
     public RandomizedQueue() {
@@ -30,12 +30,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             throw new NullPointerException();
         }
 
+//        System.out.println("Value of n: " + n);
         if (n == q.length) {
             resize(2 * q.length);
         }
 
-        q[tail++] = item;
-        n++;
+        q[n++] = item;
+//        n++;
     }
 
     // remove and return a random item
@@ -43,17 +44,35 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
+        
+//        Item item = null;
+//        boolean sentinel = true;
+        
+//        while (sentinel) {
+//            int index = StdRandom.uniform(n);
+//            item = q[index];
+//            if (item != null) {
+//                sentinel = false;
+//                q[index] = null;
+//            }
+//        }
+        
+        int index = StdRandom.uniform(n);
+        Item item = q[index];
+        Item last = q[n-1];
+        Item temp = item;
+        item = last;
+        last = temp;
 
-        StdRandom.shuffle(q);
-        Item item = q[--tail];
-        q[tail] = null;
-        n--;
+        q[--n] = null;
 
-        if (n == q.length/4) {
+        if (n > 0 && n == q.length/4) {
             resize(q.length/2);
         }
 
-        return item;
+//        System.out.println("Outside While Loop");
+//        System.out.println("item " + item);
+        return last;
     }
 
     // return (but do not remove) a random item
@@ -61,8 +80,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-
-        return q[StdRandom.uniform(n)];
+        
+        Item item = null;
+        
+        boolean sentinel = true;
+        
+        while (sentinel) {
+            item = q[StdRandom.uniform(n)];
+            if (item != null) {
+                sentinel = false;
+            }
+        }
+        
+        return item;
     }
 
     // return an independent iterator over items in random order
@@ -103,4 +133,24 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             throw new UnsupportedOperationException();
         }
     }
+    
+//    public static void main(String[] args) {
+//        RandomizedQueue<Integer> r = new RandomizedQueue<>();
+//        r.enqueue(100);
+//        r.enqueue(1);
+//        r.enqueue(12);
+//        r.enqueue(13);
+//        r.enqueue(4);
+//        r.enqueue(5);
+//        r.enqueue(60);
+//        r.enqueue(78);
+//        r.enqueue(9);
+//        System.out.println(r.dequeue());
+////        System.out.println(r.dequeue());
+//        r.enqueue(1000);
+//        System.out.println(r.dequeue());
+//        System.out.println(r.size());
+//        r.enqueue(2000);
+//        System.out.println(r.size());
+//    }
 }

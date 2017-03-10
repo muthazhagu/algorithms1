@@ -60,9 +60,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int index = StdRandom.uniform(n);
         Item item = q[index];
         Item last = q[n-1];
-        Item temp = item;
-        item = last;
-        last = temp;
+        Item temp = last;
+        last = item;
+        item = temp;
 
         q[--n] = null;
 
@@ -72,7 +72,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 //        System.out.println("Outside While Loop");
 //        System.out.println("item " + item);
-        return last;
+        return item;
     }
 
     // return (but do not remove) a random item
